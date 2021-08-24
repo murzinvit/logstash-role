@@ -25,20 +25,14 @@
       template:
          src: templates/logstash.sh.j2
          dest: /etc/profile.d/logstash.sh
-         mode: 0755
+         mode: 0777
       tags: logstash
-    #- name: Put on logstash file
-    #  become: true
-    #  template:
-    #    src: templates/elasticsearch.j2
-    #    dest: "{{ elastic_home }}/bin/elasticsearch"
-    #    mode: 0755
-    #- name: Put on elasticsearch.yml
-    #  become: true
-    #  template:
-    #    src: templates/elasticsearch.yml.j2
-    #    dest: "{{ elastic_home }}/config/elasticsearch.yml"
-    #    mode: 0755
+    - name: Put on logstash file
+      become: true
+      template:
+        src: templates/logstash.conf.j2
+        dest: "{{ elastic_home }}/config/logstash.conf"
+        mode: 0755
     - name: Ensure user logstash exists
       user:
         user: logstash
