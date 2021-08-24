@@ -30,7 +30,7 @@
     - name: Put on logstash file
       become: true
       template:
-        src: templates/logstash-simple.conf.j2
+        src: templates/logstash-sample.conf.j2
         dest: "{{ elastic_home }}/config/logstash-sample.conf"
         mode: 0755
     - name: Ensure user logstash exists
