@@ -27,11 +27,17 @@
          dest: /etc/profile.d/logstash.sh
          mode: 0777
       tags: logstash
-    - name: Put on logstash file
+    - name: Put on logstash-sample.conf
       become: true
       template:
         src: templates/logstash-sample.conf.j2
-        dest: "{{ elastic_home }}/config/logstash-sample.conf"
+        dest: "{{ logstash_home }}/config/logstash-sample.conf"
+        mode: 0755
+    - name: Put on logstash.yml
+      become: true
+      template:
+        src: templates/logstash.yml.j2
+        dest: "{{ logstash_home }}/config/logstash.yml"
         mode: 0755
     - name: Ensure user logstash exists
       user:
@@ -51,5 +57,5 @@
     - name: Start Logstash
       become_user: logstash
       become_method: su
-      shell: "{{ logstash_home }}/bin/logstash -f logstash-sample.conf"
+      shell: "{{ logstash_home }}/bin/logstash"
 
