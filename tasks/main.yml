@@ -39,6 +39,12 @@
         src: templates/logstash.yml.j2
         dest: "{{ logstash_home }}/config/logstash.yml"
         mode: 0755
+    - name: Put on pipelines.yml to config/
+      become: true
+      template:
+        src: templates/pipelines.yml.j2
+        dest: "{{ logstash_home }}/config/pipelines.yml"
+        mode: 0755
     - name: Ensure user logstash exists
       user:
         user: logstash
